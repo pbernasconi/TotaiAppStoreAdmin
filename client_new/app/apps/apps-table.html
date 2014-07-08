@@ -1,0 +1,186 @@
+<div class="page">
+
+	<h1>Apps - Table</h1>
+
+	<section class="panel panel-default table-dynamic">
+		<div class="panel-heading" style="padding-bottom: 20px">
+			<strong><span class="glyphicon glyphicon-th"></span> Bordered table</strong>
+
+			<div class="btn-group pull-right">
+				<button ng-repeat="btn in buttons" class="btn btn-line-primary" ng-click="selectBtn($index)" ng-class="{active: $index == selected}">{{btn.name}}</button>
+			</div>
+
+		</div>
+
+		<div class="table-filters">
+			<div class="row">
+				<div class="col-sm-4 col-xs-6">
+					<form>
+						<input type="text"
+						       placeholder="search"
+						       class="form-control"
+						       data-ng-model="searchKeywords"
+						       data-ng-keyup="search()">
+					</form>
+				</div>
+				<div class="col-sm-3 col-xs-6 filter-result-info">
+                    <span>
+                        Showing {{filteredStores.length}}/{{stores.length}} entries
+                    </span>
+				</div>
+			</div>
+		</div>
+
+		<table class="table table-bordered table-striped table-responsive" ng-hide="selected == 1">
+			<thead>
+			<tr>
+				<th>
+					<div class="th">
+						Nombre
+                        <span class="glyphicon glyphicon-chevron-up"
+                              data-ng-click=" order('nombre') "
+                              data-ng-class="{active: row == 'nombre'}"></span>
+                        <span class="glyphicon glyphicon-chevron-down"
+                              data-ng-click=" order('-nombre') "
+                              data-ng-class="{active: row == '-nombre'}"></span>
+					</div>
+				</th>
+				<th>
+					<div class="th">
+						Detaille
+                        <span class="glyphicon glyphicon-chevron-up"
+                              data-ng-click=" order('detaille') "
+                              data-ng-class="{active: row == 'detaille'}"></span>
+                        <span class="glyphicon glyphicon-chevron-down"
+                              data-ng-click=" order('-detaille') "
+                              data-ng-class="{active: row == '-detaille'}"></span>
+					</div>
+				</th>
+				<th>
+					<div class="th">
+						Device
+                        <span class="glyphicon glyphicon-chevron-up"
+                              data-ng-click=" order('device') "
+                              data-ng-class="{active: row == 'device'}"></span>
+                        <span class="glyphicon glyphicon-chevron-down"
+                              data-ng-click=" order('-device') "
+                              data-ng-class="{active: row == '-device'}"></span>
+					</div>
+				</th>
+				<th>
+					<div class="th">
+						OS
+                        <span class="glyphicon glyphicon-chevron-up"
+                              data-ng-click=" order('OS') "
+                              data-ng-class="{active: row == 'OS'}"></span>
+                        <span class="glyphicon glyphicon-chevron-down"
+                              data-ng-click=" order('-OS') "
+                              data-ng-class="{active: row == '-OS'}"></span>
+					</div>
+				</th>
+				<th>
+					<div class="th">
+						OS Version
+                        <span class="glyphicon glyphicon-chevron-up"
+                              data-ng-click=" order('OS_version') "
+                              data-ng-class="{active: row == 'OS_version'}"></span>
+                        <span class="glyphicon glyphicon-chevron-down"
+                              data-ng-click=" order('-OS_version') "
+                              data-ng-class="{active: row == '-OS_version'}"></span>
+					</div>
+				</th>
+				<th>
+					<div class="th">
+						Version
+                        <span class="glyphicon glyphicon-chevron-up"
+                              data-ng-click=" order('version') "
+                              data-ng-class="{active: row == 'version'}"></span>
+                        <span class="glyphicon glyphicon-chevron-down"
+                              data-ng-click=" order('-version') "
+                              data-ng-class="{active: row == '-version'}"></span>
+					</div>
+				</th>
+				<th>
+					<div class="th">
+						Fecha / Hora
+                        <span class="glyphicon glyphicon-chevron-up"
+                              data-ng-click=" order('version_fecha_hora') "
+                              data-ng-class="{active: row == 'version_fecha_hora'}"></span>
+                        <span class="glyphicon glyphicon-chevron-down"
+                              data-ng-click=" order('-version_fecha_hora') "
+                              data-ng-class="{active: row == '-version_fecha_hora'}"></span>
+					</div>
+				</th>
+			</tr>
+			</thead>
+			<tbody>
+			<tr data-ng-repeat="store in currentPageStores" ui-sref="apps-detail({SEQ: store.SEQ})">
+				<td>{{store.nombre}}</td>
+				<td>{{store.detaille}}</td>
+				<td>{{store.device}}</td>
+				<td>{{store.OS}}</td>
+				<td>{{store.OS_version}}</td>
+				<td>{{store.version}}</td>
+				<td>{{store.version_fecha_hora | asDate | date: long}}</td>
+			</tr>
+			</tbody>
+		</table>
+
+		<footer class="table-footer" ng-hide="selected == 1">
+			<div class="row">
+				<div class="col-md-6 page-num-info">
+                    <span>
+                        Show
+                        <select data-ng-model="numPerPage"
+                                data-ng-options="num for num in numPerPageOpt"
+                                data-ng-change="onNumPerPageChange()">
+                        </select>
+                        entries per page
+                    </span>
+				</div>
+				<div class="col-md-6 text-right pagination-container">
+					<pagination class="pagination-sm"
+					            page="currentPage"
+					            total-items="filteredStores.length"
+					            max-size="4"
+					            on-select-page="select(page)"
+					            items-per-page="numPerPage"
+					            rotate="false"
+					            boundary-links="true"></pagination>
+				</div>
+			</div>
+		</footer>
+	</section>
+
+
+	<div ng-hide="selected == 0">
+		<div class="row" ng-repeat="i in gridStores.range() ">
+			<div class="span4 col-md-4" ng-repeat="store in gridStores.slice(i,i+3) | filter:searchKeywords">
+				<div class="panel panel-default admin-grid " ui-sref="apps-detail({SEQ: store.SEQ})">
+					<div class="panel-heading text-center ">
+						<h4>{{store.nombre}}</h4>
+
+						<span style="font-size: 12px"> {{store.detaille}}</span>
+					</div>
+					<div class="panel-body">
+
+						<div class="row">
+							<div class="col-md-6">
+								<img class="img-responsive" ng-src="{{store.icon}}">
+							</div>
+
+							<div class="col-md-6">
+								<p>{{store.device}} {{store.OS}} {{store.OS_version}}</p>
+
+								<p>v {{store.version}}</p>
+
+								<p>{{store.version_fecha_hora | asDate | date: short}}</p>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

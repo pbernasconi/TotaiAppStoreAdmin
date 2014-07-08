@@ -1,0 +1,87 @@
+<div class="page">
+
+	<div class="row">
+		<div class="col-md-6">
+			<div class="panel" style="background-color: transparent; -webkit-box-shadow: none;">
+				<button class="btn btn-primary" ui-sref="persona-table">
+					<i class="glyphicon glyphicon-chevron-left"></i>
+					BACK to Table View
+				</button>
+			</div>
+		</div>
+
+
+		<div class="col-md-5">
+			<div class="panel text-right" style="background-color: transparent; -webkit-box-shadow: none;">
+				<button class="btn btn-default" ng-click="cancel()">
+					CANCEL
+				</button>
+			</div>
+		</div>
+		<div class="col-md-1">
+			<div class="panel text-right" style="background-color: transparent; -webkit-box-shadow: none;">
+				<button class="btn btn-danger" ng-click="edit()">
+					EDIT
+				</button>
+			</div>
+		</div>
+	</div>
+
+	<section class="panel panel-default">
+		<div class="panel-heading">
+			{{persona.apellido}} {{persona.nombre}}
+		</div>
+
+		<div class="panel-body">
+
+			<p><strong>Usuario</strong> {{persona.usuario}}</p>
+
+			<p><strong>Titulo</strong> {{persona.titulo}}</p>
+
+			<p><strong>Funcion</strong> {{persona.funcion}}</p>
+		</div>
+	</section>
+
+
+
+	<section class="panel panel-default">
+		<div class="panel-heading">
+			AVAILABLE APPS
+		</div>
+
+		<div class="panel-body  panel-apps">
+			<div class="drop-zone" ng-drop="true" ng-drop-success="dropIntoAvailable($data,$event)">
+				<div class="app" ng-repeat="app in availableApps" ng-drag="true" ng-drag-data="app" ng-drag-success="dragOutOfAvailable($data,$event)">
+					<img class="img-responsive" ng-src="{{app.icon}}">
+					<span class="app-title">{{app.nombre}}</span>
+				</div>
+			</div>
+		</div>
+
+	</section>
+
+
+	<section class="panel panel-default">
+		<div class="panel-heading">
+			ALLOWED APPS
+		</div>
+
+		<div class="panel-body panel-apps">
+			<div class="drop-zone" ng-drop="true" ng-drop-success="dropIntoAccepted($data,$event)">
+				<div class="app" ng-repeat="app in acceptedApps" ng-drag="false" ng-drag-data="app" ng-drag-success="dragOutOfAccepted($data,$event)">
+					<img class="img-responsive" ng-src="{{app.icon}}">
+					<button ng-prevent-drag="true" class="app-btn" ng-click="removeApp(app, $index)">
+						<i class="fa fa-times app-btn-icon"></i>
+					</button>
+					<span>{{app.nombre}}</span>
+				</div>
+			</div>
+		</div>
+	</section>
+
+
+	<p>{{availableApps}}</p>
+
+	<p>{{acceptedApps}}</p>
+
+</div>

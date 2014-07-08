@@ -1,0 +1,137 @@
+<div class="page">
+
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			Upload
+		</div>
+
+		<div class="panel-body">
+			<wizard on-finish="finishedWizard()" class="wizard-steps-container">
+
+				<wz-step title="Select App">
+					<h2 class="text-center">Upload a New App or a New Version of a Current App</h2>
+					<br><br>
+
+					<div class="row">
+						<div class="col-md-3 col-md-offset-2 ">
+							<buttton class="btn btn-warning btn-block" wz-next="select('app')"><strong>NEW APP</strong></buttton>
+						</div>
+						<div class="col-md-3 col-md-offset-2">
+							<buttton class="btn btn-success btn-block" wz-next="select('version')"><strong>NEW VERSION</strong></buttton>
+						</div>
+					</div>
+				</wz-step>
+
+
+				<wz-step title="Details">
+					<button class="btn btn-primary" wz-previous>
+						<i class="fa fa-arrow-left"></i>
+						Back
+					</button>
+					<div ng-show="uploadType == 'app'">
+						<h3>Enter a New App</h3>
+
+						<form name="form_newApp" class="form-horizontal form-validation" novalidate>
+							<div class="form-group">
+								<div class="col-md-4">
+									<label>Nombre</label>
+									<input type="text" class="form-control" ng-model="newApp.nombre" required>
+								</div>
+								<div class="col-md-4">
+									<label>Detaille</label>
+									<input type="text" class="form-control" ng-model="newApp.detaille" required>
+								</div>
+								<div class="col-md-4">
+									<label>Bundle Id</label>
+									<input type="text" class="form-control" ng-model="newApp.bundle_identifier" required>
+								</div>
+							</div>
+
+
+							<div class="form-group">
+								<div class="col-md-4">
+									<label>Device</label>
+									<input type="text" class="form-control" ng-model="newApp.device" required>
+								</div>
+								<div class="col-md-4">
+									<label>OS</label>
+									<input type="text" class="form-control" ng-model="newApp.OS" required>
+								</div>
+								<div class="col-md-4">
+									<label>OS Version</label>
+									<input type="text" class="form-control" ng-model="newApp.OS_version" required>
+								</div>
+							</div>
+
+
+							<div class="form-group">
+								<div class="col-md-3">
+									<input type="file" title="Choose Icon File" data-ui-file-upload  ng-file-select="iconSelect($files)" class="btn-primary">
+								</div>
+								<div class="col-md-3 col-md-offset-1">
+									<img class="img-responsive" ng-src="{{newApp.icon}}" style="height: 150px; width: 150px;">
+								</div>
+							</div>
+
+						</form>
+
+						<div class="row">
+							<div class="col-md-6">
+								<button class="btn btn-default btn-block" ng-click="revert()" ng-disabled="!canRevert()">REVERT CHANGES</button>
+							</div>
+							<div class="col-md-6">
+								<button type="submit" class="btn btn-success btn-block" ng-disabled="!canSubmit()" ng-click="saveNewApp(newApp)">SUBMIT</button>
+							</div>
+						</div>
+					</div>
+
+					<div ng-show="uploadType == 'version'">
+						<h3>Select App</h3>
+					</div>
+				</wz-step>
+
+				<wz-step title="Continuing">
+					<h2>Continuing</h2>
+
+					<form name="wizard_step2">
+
+
+						<div class="fileupload fileupload-button fileupload-button-block" ng-class="{ true: 'fileupload-button-disabled'}[invalidForm(app)]">
+							<input type="file" ng-file-select="plistSelect($files)" ng-disabled="invalidForm(app)"/>
+							Upload Plist
+						</div>
+
+					</form>
+					<buttton class="btn btn-primary" wz-next>Next</buttton>
+				</wz-step>
+				<wz-step title="Finish">
+					<h2>Even more steps!!</h2>
+
+					<form name="wizard_step3">
+						<div class="form-group">
+							<label>Age</label>
+							<input type="number"
+							       class="form-control"
+							       placeholder="Min value 0, max value 100"
+							       data-ng-model="wizard.age"
+							       required
+							       data-min="0"
+							       data-max="100">
+						</div>
+						<div class="form-group">
+							<label>Address</label>
+							<input type="number"
+							       class="form-control"
+							       placeholder="Min value 0, max value 100"
+							       data-ng-model="wizard.address"
+							       required
+							       data-min="0"
+							       data-max="100">
+						</div>
+					</form>
+					<buttton type="submit" class="btn btn-primary" wz-next>Finish</buttton>
+				</wz-step>
+			</wizard>
+		</div>
+	</div>
+</div>

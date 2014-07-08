@@ -1,0 +1,55 @@
+<div class="page">
+
+	<div class="row">
+		<div class="col-md-6">
+			<div class="panel" style="background-color: transparent; -webkit-box-shadow: none;">
+				<button class="btn btn-primary" ui-sref="apps-table">
+					<i class="glyphicon glyphicon-chevron-left"></i>
+					BACK to Table View
+				</button>
+			</div>
+		</div>
+
+
+		<div class="col-md-5">
+			<div class="panel text-right" style="background-color: transparent; -webkit-box-shadow: none;">
+				<button class="btn btn-default" ng-click="cancel()">
+					CANCEL
+				</button>
+			</div>
+		</div>
+		<div class="col-md-1">
+			<div class="panel text-right" style="background-color: transparent; -webkit-box-shadow: none;">
+				<button class="btn btn-danger" ng-click="edit()">
+					EDIT
+				</button>
+			</div>
+		</div>
+	</div>
+
+	<section class="panel panel-default">
+		<div class="panel-heading">
+			<strong>APP :</strong> {{app.nombre}}
+		</div>
+
+		<div class="panel-body">
+			<div class="row">
+				<div class="col-md-4">
+					<img class="img-responsive" ng-src="{{app.icon}}">
+
+				</div>
+				<div class="col-md-8">
+					<p><strong>Nombre</strong> {{app.nombre}}</p>
+					<p><strong>Detaille</strong> {{app.detaille}}</p>
+					<p><strong>Device</strong> {{app.device}}</p>
+					<p><strong>OS</strong> {{app.OS}}</p>
+					<p><strong>OS Version</strong> {{app.OS_version}}</p>
+					<p><strong>Version</strong> {{app.version}}</p>
+
+				</div>
+			</div>
+		</div>
+	</section>
+
+
+</div>

@@ -1,0 +1,158 @@
+.apps {
+    width: 150px;
+    height: 150px;
+    float: left;
+}
+
+.row-apps {
+    padding-left: 15px;
+    margin-left: 0;
+}
+
+.thumbnail {
+    height: 280px !important;
+}
+
+.btn-droppable {
+    width: 180px;
+    height: 30px;
+    padding-left: 4px;
+}
+
+.btn-draggable {
+    width: 160px;
+}
+
+.panel-apps {
+    padding: 0;
+    margin: 0;
+
+}
+
+.drop-zone {
+    background: rgba(223, 223, 223, 0.50);
+    height: 130px;
+    display: block;
+    position: relative;
+    border: solid 5px rgba(223, 223, 223, 0);
+}
+
+.drop-zone .drag-over {
+    border: solid 1px red;
+}
+
+[ng-drag] {
+    -moz-user-select: -moz-none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+[ng-drag] {
+    width: 100px;
+    height: 100px;
+    text-align: center;
+    display: inline-block;
+    margin: 0 10px;
+    cursor: move;
+}
+
+[ng-drag].drag-over {
+    border: solid 1px red;
+}
+
+[ng-drag].dragging {
+    opacity: 0.5;
+}
+
+[ng-drop].drag-enter {
+    border: solid 5px #02d974;
+}
+
+[ng-drop] div {
+    position: relative;
+    z-index: 2;
+}
+
+.app-btn {
+    position: absolute;
+    right: -5px;
+    top: -5px;
+    background: transparent;
+    border: none;
+    height: 30px;
+    width: 30px;
+}
+
+.app-btn-icon {
+    text-align: center;
+    border-radius: 50%;
+    border: 1px solid #ffffff;
+    color: red;
+    font-size: 19px;
+    height: 23px !important;
+    width: 23px !important;
+    background-color: #000000;
+}
+
+.app-btn:hover {
+    background: transparent;
+    border: none;
+}
+
+.app-title {
+    font-weight: bold;
+}
+
+.fileupload {
+    width: 100px;
+    height: 50px;
+    position: relative;
+    overflow: hidden;
+}
+
+.fileupload-button {
+    font-family: "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+    border-color: #b2b2b2;
+    background-color: #f8f8f8;
+    color: #444;
+    position: relative;
+    display: inline-block;
+    margin: 0;
+    padding: 0 12px;
+    min-width: 52px;
+    min-height: 47px;
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 2px;
+    vertical-align: top;
+    text-align: center;
+    text-overflow: ellipsis;
+    font-size: 16px;
+    line-height: 42px;
+    cursor: pointer;
+}
+
+.fileupload-button-disabled {
+    opacity: 0.4;
+    cursor: default !important;
+    pointer-events: none;
+}
+
+.fileupload-button-block {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    width: 100%;
+}
+
+.fileupload input {
+    position: absolute;
+    top: 0;
+    right: 0;
+    cursor: pointer;
+    opacity: 0.0;
+    filter: alpha(opacity=0);
+    font-size: 300px;
+    height: 200px;
+}

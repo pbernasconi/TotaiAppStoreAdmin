@@ -1,0 +1,32 @@
+{
+  "name": "angular-file-upload",
+  "title": "Angular File Upload module",
+  "description": "Angular File Upload module",
+  "version": "0.0.2",
+  "main": "angular-file-upload.min.js",
+  "homepage": "https://github.com/danialfarid/angular-file-upload",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/danialfarid/angular-file-upload"
+  },
+  "keywords": [
+    "angular",
+    "angular-file-upload"
+  ],
+  "dependencies": {},
+  "devDependencies": {},
+  "scripts": {
+    "build": "npm install"
+  },
+  "_id": "angular-file-upload@0.0.2",
+  "_from": "angular-file-upload@",
+  "readme": "# Angular File Upload module",
+  "readmeFilename": "README.md",
+  "bugs": {
+    "url": "https://github.com/danialfarid/angular-file-upload/issues"
+  },
+  "dist": {
+    "shasum": "887f5182e90c88d7b779327e766f9d1965b22f68"
+  },
+  "_resolved": "https://registry.npmjs.org/angular-file-upload/-/angular-file-upload-0.0.2.tgz"
+}
