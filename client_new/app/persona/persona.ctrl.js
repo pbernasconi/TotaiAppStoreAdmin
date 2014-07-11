@@ -110,6 +110,7 @@ angular.module('persona.ctrl', [])
 
   })
 
+
   .controller('PersonaNewCtrl', function ($scope, $rootScope, $timeout, $modal, Apps, PersonaApps, Persona, PersonaNew) {
 
     $scope.form = {

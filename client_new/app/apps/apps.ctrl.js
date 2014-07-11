@@ -249,4 +249,9 @@ angular.module('apps.ctrl', [])
         $scope.ipaUpload = true;
       });
     }
+  })
+
+
+  .controller('AppsUploadTestCtrl', function ($scope, $rootScope, $timeout, $modal, Apps, PersonaApps, Persona, PersonaNew) {
+
   });

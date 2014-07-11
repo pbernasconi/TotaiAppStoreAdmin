@@ -92,6 +92,13 @@ angular.module('app', [
       })
 
 
+      .state('persona-groups', {
+        url: '/persona/groups',
+        templateUrl: 'app/persona/persona-groups.html',
+        controller: 'PersonaGroupsCtrl'
+      })
+
+
       // APPS
 
       .state('apps-table', {
@@ -113,12 +120,11 @@ angular.module('app', [
         controller: 'AppsUploadCtrl'
       })
 
-
-      .state('ui-typography', {
-        url: '/ui/typography',
-        templateUrl: 'app/views/ui/typography.html'
+      .state('apps-upload-test', {
+        url: '/apps/upload-test',
+        templateUrl: 'app/apps/apps-upload-test.html',
+        controller: 'AppsUploadTestCtrl'
       });
-
 
     $urlRouterProvider.otherwise('/dashboard');
 
