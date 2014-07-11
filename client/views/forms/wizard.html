@@ -53,24 +53,14 @@
 					<form name="wizard_step1">
 						<div class="form-group">
 							<label for="">First Name</label>
-							<input type="text"
-							       class="form-control"
-							       data-ng-model="wizard.firstName"
-							       required
-								>
+							<input type="text" class="form-control" data-ng-model="wizard.firstName" required>
 						</div>
 						<div class="form-group">
 							<label for="">Last Name</label>
-							<input type="text"
-							       class="form-control"
-							       data-ng-model="wizard.lastName"
-							       required
-								>
+							<input type="text" class="form-control" data-ng-model="wizard.lastName" required>
 						</div>
 					</form>
-					<buttton class="btn btn-primary"
-					         ng-click="isValidateStep1()"
-					         wz-next>Next
+					<buttton class="btn btn-primary" ng-click="isValidateStep1()" wz-next>Next
 					</buttton>
 				</wz-step>
 				<wz-step title="Continuing">

@@ -31,7 +31,7 @@
 		<aside ng-include=" 'app/views/nav.html' " id="nav-container"></aside>
 	</div>
 
-	<div class="view-container">
+	<div class="view-container" >
 		<section ui-view id="content" class="animate-fade-up"></section>
 	</div>
 </div>
@@ -74,18 +74,22 @@
 <script src="bower_components/angular-resource/angular-resource.min.js"></script>
 <script src="bower_components/ngDraggable/ngDraggable.js"></script>
 <script src="bower_components/angular-file-upload/angular-file-upload.min.js"></script>
+<script src="bower_components/angular-ui-utils/ui-utils.min.js"></script>
+<script src="bower_components/plist-parser/plist_parser.js"></script>
+<script src="bower_components/sax-js/sax.js"></script>
 <script src="app/scripts/vendors/skycons.js"></script>
 <!-- endbuild -->
 
 <!-- build:js({.tmp,app}) scripts/app.js -->
 <script src="app/app.js"></script>
+<script src="app/main.js"></script>
 <script src="app/services.js"></script>
 <script src="app/filters.js"></script>
+<script src="app/directives.js"></script>
 
 <script src="app/persona/persona.ctrl.js"></script>
 
 <script src="app/apps/apps.ctrl.js"></script>
-
 
 <script src="app/scripts/shared/main.js"></script>
 <script src="app/scripts/shared/directives.js"></script>

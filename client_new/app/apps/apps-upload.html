@@ -1,137 +1,315 @@
 <div class="page">
+<div class="panel panel-default">
+<div class="panel-heading">Upload</div>
+<div class="panel-body">
+<wizard on-finish="finishedWizard()" class="wizard-steps-container">
 
-	<div class="panel panel-default">
-		<div class="panel-heading">
-			Upload
+<wz-step title="Upload Type">
+	<h2 class="text-center">Upload a New App or a New Version of a Current App</h2>
+	<br><br>
+
+	<div class="row">
+		<div class="col-sm-3 col-sm-offset-2 ">
+			<buttton class="btn btn-success btn-block" wz-next="select('app')"><strong>NEW APP</strong></buttton>
 		</div>
-
-		<div class="panel-body">
-			<wizard on-finish="finishedWizard()" class="wizard-steps-container">
-
-				<wz-step title="Select App">
-					<h2 class="text-center">Upload a New App or a New Version of a Current App</h2>
-					<br><br>
-
-					<div class="row">
-						<div class="col-md-3 col-md-offset-2 ">
-							<buttton class="btn btn-warning btn-block" wz-next="select('app')"><strong>NEW APP</strong></buttton>
-						</div>
-						<div class="col-md-3 col-md-offset-2">
-							<buttton class="btn btn-success btn-block" wz-next="select('version')"><strong>NEW VERSION</strong></buttton>
-						</div>
-					</div>
-				</wz-step>
-
-
-				<wz-step title="Details">
-					<button class="btn btn-primary" wz-previous>
-						<i class="fa fa-arrow-left"></i>
-						Back
-					</button>
-					<div ng-show="uploadType == 'app'">
-						<h3>Enter a New App</h3>
-
-						<form name="form_newApp" class="form-horizontal form-validation" novalidate>
-							<div class="form-group">
-								<div class="col-md-4">
-									<label>Nombre</label>
-									<input type="text" class="form-control" ng-model="newApp.nombre" required>
-								</div>
-								<div class="col-md-4">
-									<label>Detaille</label>
-									<input type="text" class="form-control" ng-model="newApp.detaille" required>
-								</div>
-								<div class="col-md-4">
-									<label>Bundle Id</label>
-									<input type="text" class="form-control" ng-model="newApp.bundle_identifier" required>
-								</div>
-							</div>
-
-
-							<div class="form-group">
-								<div class="col-md-4">
-									<label>Device</label>
-									<input type="text" class="form-control" ng-model="newApp.device" required>
-								</div>
-								<div class="col-md-4">
-									<label>OS</label>
-									<input type="text" class="form-control" ng-model="newApp.OS" required>
-								</div>
-								<div class="col-md-4">
-									<label>OS Version</label>
-									<input type="text" class="form-control" ng-model="newApp.OS_version" required>
-								</div>
-							</div>
-
-
-							<div class="form-group">
-								<div class="col-md-3">
-									<input type="file" title="Choose Icon File" data-ui-file-upload  ng-file-select="iconSelect($files)" class="btn-primary">
-								</div>
-								<div class="col-md-3 col-md-offset-1">
-									<img class="img-responsive" ng-src="{{newApp.icon}}" style="height: 150px; width: 150px;">
-								</div>
-							</div>
-
-						</form>
-
-						<div class="row">
-							<div class="col-md-6">
-								<button class="btn btn-default btn-block" ng-click="revert()" ng-disabled="!canRevert()">REVERT CHANGES</button>
-							</div>
-							<div class="col-md-6">
-								<button type="submit" class="btn btn-success btn-block" ng-disabled="!canSubmit()" ng-click="saveNewApp(newApp)">SUBMIT</button>
-							</div>
-						</div>
-					</div>
-
-					<div ng-show="uploadType == 'version'">
-						<h3>Select App</h3>
-					</div>
-				</wz-step>
-
-				<wz-step title="Continuing">
-					<h2>Continuing</h2>
-
-					<form name="wizard_step2">
-
-
-						<div class="fileupload fileupload-button fileupload-button-block" ng-class="{ true: 'fileupload-button-disabled'}[invalidForm(app)]">
-							<input type="file" ng-file-select="plistSelect($files)" ng-disabled="invalidForm(app)"/>
-							Upload Plist
-						</div>
-
-					</form>
-					<buttton class="btn btn-primary" wz-next>Next</buttton>
-				</wz-step>
-				<wz-step title="Finish">
-					<h2>Even more steps!!</h2>
-
-					<form name="wizard_step3">
-						<div class="form-group">
-							<label>Age</label>
-							<input type="number"
-							       class="form-control"
-							       placeholder="Min value 0, max value 100"
-							       data-ng-model="wizard.age"
-							       required
-							       data-min="0"
-							       data-max="100">
-						</div>
-						<div class="form-group">
-							<label>Address</label>
-							<input type="number"
-							       class="form-control"
-							       placeholder="Min value 0, max value 100"
-							       data-ng-model="wizard.address"
-							       required
-							       data-min="0"
-							       data-max="100">
-						</div>
-					</form>
-					<buttton type="submit" class="btn btn-primary" wz-next>Finish</buttton>
-				</wz-step>
-			</wizard>
+		<div class="col-sm-3 col-sm-offset-2">
+			<buttton class="btn btn-warning  btn-block" wz-next="select('version')"><strong>NEW VERSION</strong></buttton>
 		</div>
 	</div>
+
+	<br><br>
+</wz-step>
+
+
+<wz-step title="Details">
+	<div class="row">
+		<div class="col-md-2 pull-left">
+			<button class="btn btn-primary btn-block" wz-previous><i class="fa fa-arrow-left"></i> Back</button>
+		</div>
+	</div>
+
+	<div ng-if="uploadType == 'app'">
+		<h3 class="text-center">Enter a New App</h3>
+
+		<hr>
+		<br>
+
+		<form name="form_newApp" class="form-horizontal form-validation" novalidate>
+			<div class="form-group">
+				<div class="col-sm-4">
+					<label>App Nombre</label>
+					<input type="text" class="form-control" ng-model="newApp.nombre" required ng-change="onNombreChange()">
+				</div>
+
+				<div class="col-sm-4">
+					<label>Version</label>
+					<input type="text" class="form-control" ui-mask="{{'9.9.9'}}" model-view-value="true" ng-model="newApp.version" required>
+				</div>
+
+				<div class="col-sm-4">
+					<label>Bundle Id</label>
+					<input type="text" class="form-control" ng-model="newApp.bundle_identifier" disabled required>
+				</div>
+			</div>
+
+			<br>
+
+			<div class="form-group">
+				<div class="col-sm-12">
+					<label>Detaille</label>
+					<textarea class="form-control" ng-model="newApp.detaille" required></textarea>
+				</div>
+
+			</div>
+
+			<br>
+
+			<div class="form-group">
+				<div class="col-sm-4">
+					<label>Device</label>
+					<input type="text" class="form-control" ng-model="newApp.device" placeholder="iPhone" required>
+				</div>
+				<div class="col-sm-4">
+					<label>OS</label>
+					<select class="form-control" ng-model="newApp.OS" required>
+						<option selected>iOS</option>
+						<option>Android</option>
+					</select>
+				</div>
+				<div class="col-sm-4">
+					<label>OS Version</label>
+					<input type="text" class="form-control" ng-model="newApp.OS_version" placeholder="7.2" required>
+				</div>
+			</div>
+
+
+			<div class="form-group">
+				<div class="col-sm-3">
+					<input type="file"
+					       accept="image/*"
+					       title="Choose Icon File"
+					       ui-file-upload
+					       ng-file-select="iconSelect($files)"
+					       class="btn-primary" required>
+				</div>
+				<div class="col-sm-3 col-sm-offset-1">
+					<img class="img-responsive" ng-src="{{newApp.icon}}" style="height: 150px; width: 150px;" required>
+				</div>
+			</div>
+
+		</form>
+
+		<div class="row">
+			<div class="col-sm-6">
+				<button class="btn btn-default btn-block" ng-disabled="!canRevert(form_newApp)" ng-click="revert()">REVERT CHANGES</button>
+			</div>
+			<div class="col-sm-6">
+				<button class="btn btn-success btn-block" wz-next>CONTINUE</button>
+				<!-- ng-disabled="!canSubmit(form_newApp)"-->
+			</div>
+		</div>
+	</div>
+
+	<div ng-show="uploadType == 'version'">
+
+		<h3 class="text-center">Slect The App to Update</h3>
+
+		<hr>
+		<br>
+
+		<form name="form_newApp" class="form-horizontal form-validation" novalidate>
+
+
+			<div class="row">
+				<div class="col-sm-6 col-sm-offset-3">
+					<select class="form-control" ng-options="app.nombre for app in availableApps" ng-model="selectedApp" ng-change="selectUpdateApp(selectedApp)">
+					</select>
+				</div>
+			</div>
+
+			<div class="divider"></div>
+
+			<div class="media col-md-8 col-md-offset-2" > <!-- ng-show="newApp.nombre != null"-->
+				<div class="media-body">
+					<ul class="list-unstyled list-info">
+						<li>
+							<span class="icon glyphicon glyphicon-user"></span>
+							<label>Nombre</label>
+							{{newApp.nombre}}
+						</li>
+						<li>
+							<span class="icon glyphicon glyphicon-envelope"></span>
+							<label>Detaille</label>
+							{{newApp.detaille}}
+						</li>
+						<li>
+							<span class="icon glyphicon glyphicon-home"></span>
+							<label>Bundle ID</label>
+							{{newApp.bundle_identifier}}
+						</li>
+						<li>
+							<span class="icon glyphicon glyphicon-home"></span>
+							<label>Cur Version</label>
+							{{newApp.version}}
+						</li>
+						<li>
+							<span class="icon glyphicon glyphicon-home"></span>
+							<label>Old Version</label>
+							{{newApp.version_antigua}}
+						</li>
+						<li>
+							<span class="icon glyphicon glyphicon-globe"></span>
+							<label>Device</label>
+							{{newApp.device}}
+						</li>
+						<li>
+							<span class="icon glyphicon glyphicon-earphone"></span>
+							<label>OS</label>
+							{{newApp.OS}}
+						</li>
+						<li>
+							<span class="icon glyphicon glyphicon-flag"></span>
+							<label>OS Version</label>
+							{{newApp.OS_version}}
+						</li>
+					</ul>
+				</div>
+			</div>
+
+		</form>
+		<div class="divider"></div>
+
+		<div class="row" ng-hide="newApp.nombre == null">
+			<div class="col-sm-6 col-sm-offset-6">
+				<button class="btn btn-success btn-block" wz-next>CONTINUE</button>
+				<!-- ng-disabled="!canSubmit(form_newApp)"-->
+			</div>
+		</div>
+	</div>
+</wz-step>
+
+
+<wz-step title="Select Files">
+	<div class="row">
+		<div class="col-md-2 pull-left">
+			<button class="btn btn-primary btn-block" wz-previous><i class="fa fa-arrow-left"></i> Back</button>
+		</div>
+	</div>
+
+
+	<h3 class="text-center">Select <strong>.plist</strong> and <strong>.ipa</strong> Files</h3>
+	<hr>
+	<br>
+
+	<div class="row">
+		<div class="col-md-4 col-md-offset-4">
+			<input type="file"
+			       accept=".plist"
+			       title="Select .plist File"
+			       ui-file-upload
+			       data-filename-placement="inside"
+			       ng-file-select="plistFileSelect($files)"
+			       class="btn btn-info btn-block"
+			       required>
+		</div>
+	</div>
+
+	<br><br>
+
+	<div class="row" ng-if="plistUpload == true">
+		<div class="col-md-2 col-md-offset-1">
+			<img class="img-responsive" src="./images/assets/plist.png" style="height: 200px; width:auto;">
+		</div>
+		<div class="col-md-8">
+			<table class="table table-striped">
+				<thead>
+				<tr>
+					<th>Key</th>
+					<th>Settings</th>
+					<th>.plist</th>
+				</tr>
+				</thead>
+				<tbody>
+				<tr>
+					<td>Title</td>
+					<td>{{newApp.nombre}}</td>
+					<td><span ng-class="{'label label-danger': metadata.title != newApp.nombre}">{{metadata.title}}</span></td>
+				</tr>
+				<tr>
+					<td>Bundle ID</td>
+					<td>{{newApp.bundle_identifier}}</td>
+					<td><span ng-class="{'label label-danger': metadata['bundle-identifier'] != newApp.bundle_identifier}">{{metadata['bundle-identifier']}}</span></td>
+				</tr>
+				<tr>
+					<td>Version</td>
+					<td>{{newApp.version}}</td>
+					<td><span ng-class="{'label label-danger': metadata['bundle-version'] != newApp.version}">{{metadata['bundle-version']}}</span></td>
+				</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+
+
+	<br><br><br>
+
+
+	<div class="row">
+		<div class="col-md-6 pull-right">
+			<buttton class="btn btn-success btn-block" wz-next>Continue</buttton>
+		</div>
+	</div>
+
+</wz-step>
+
+
+<wz-step title="Finish">
+
+
+	<div class="row">
+		<div class="col-md-2 pull-left">
+			<button class="btn btn-primary btn-block" wz-previous><i class="fa fa-arrow-left"></i> Back</button>
+		</div>
+	</div>
+
+	<h3 class="text-center">Select <strong>.ipa</strong> Files</h3>
+
+	<hr>
+	<br>
+
+	<div class="row">
+		<div class="col-md-4 col-md-offset-4">
+			<input type="file"
+			       accept=".ipa"
+			       title="Select .ipa File"
+			       ui-file-upload
+			       data-filename-placement="inside"
+			       ng-file-select="ipaFileSelect($files)"
+			       class="btn btn-warning btn-block"
+			       required>
+		</div>
+	</div>
+
+
+	<div class="row" ng-if="ipaUpload == true">
+		<div class="col-md-2 col-md-offset-1">
+			<img class="img-responsive" src="./images/assets/ipa.png" style="height: 200px; width:auto;">
+		</div>
+	</div>
+
+
+	<br><br><br>
+
+
+	<div class="row">
+		<div class="col-md-6 pull-right">
+			<buttton class="btn btn-success btn-block" wz-finish>Finalize</buttton>
+		</div>
+	</div>
+
+
+</wz-step>
+</wizard>
+</div>
+</div>
 </div>

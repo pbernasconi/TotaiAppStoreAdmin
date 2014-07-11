@@ -9,11 +9,13 @@ angular.module('app', [
   'ngResource',
   'ngDraggable',
   'angularFileUpload',
-
+  'ui.utils',
 
   // general
+  'app.controllers',
   'app.services',
   'app.filters',
+  'app.directives',
 
 
   // persona
@@ -26,7 +28,7 @@ angular.module('app', [
   'app.ui.ctrls',
   'app.ui.directives',
   'app.ui.services',
-  'app.controllers',
+  'app.old.controllers',
   'app.directives',
   'app.form.validation',
   'app.ui.form.ctrls',
@@ -44,10 +46,24 @@ angular.module('app', [
     $rootScope.DB_URL = 'http://www.desa-net.com/TOTAI/db/';
     $rootScope.totaiAppStore = 'http://desa-net.com/totaiAppStore/';
     $rootScope.appName = 'TotaiAppStore';
+
+
   })
 
   .config(function ($stateProvider, $urlRouterProvider) {
     $stateProvider
+
+
+      .state('login', {
+        url: '/login',
+        templateUrl: 'app/login/login.html'
+      })
+
+      .state('lockout', {
+        url: '/lockout',
+        templateUrl: 'app/login/lock-screen.html'
+      })
+
 
       .state('dashboard', {
         url: '/dashboard',
@@ -105,6 +121,8 @@ angular.module('app', [
 
 
     $urlRouterProvider.otherwise('/dashboard');
+
+
   });
 
 

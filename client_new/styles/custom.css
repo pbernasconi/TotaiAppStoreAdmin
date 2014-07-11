@@ -1,3 +1,12 @@
+.logo {
+    text-align: left !important;
+    padding-left: 20px;
+}
+
+.position-inherit {
+    position: inherit !important;
+}
+
 .apps {
     width: 150px;
     height: 150px;

@@ -6,66 +6,74 @@
 		<div class="panel-body">
 			<form name="form_user" class="form-horizontal form-validation" novalidate>
 				<div class="form-group">
-					<div class="col-md-3">
-						<label>Apellido</label>
-					</div>
-					<div class="col-md-7">
+					<label class="col-sm-2 control-label">Apellido</label>
+
+					<div class="col-md-4">
 						<input type="text" class="form-control" required ng-model="form.apellido">
 					</div>
-				</div>
 
-				<div class="form-group">
-					<div class="col-md-3">
-						<label>Nombre</label>
-					</div>
-					<div class="col-md-7">
+					<label class="col-sm-2 control-label">Nombre</label>
+
+					<div class="col-md-4">
 						<input type="text" class="form-control" required ng-model="form.nombre">
 					</div>
 				</div>
 
+				<div class="divider"></div>
+
+
 				<div class="form-group">
-					<div class="col-md-3">
-						<label>Usuario</label>
-					</div>
-					<div class="col-md-7">
+					<label class="col-sm-2 control-label">Usuario</label>
+
+					<div class="col-md-4">
 						<input type="text" class="form-control" required ng-model="form.usuario">
 					</div>
-				</div>
+					<label class="col-sm-2 control-label">Email</label>
 
-				<div class="form-group">
-					<div class="col-md-3">
-						<label>Contraseña</label>
-					</div>
-					<div class="col-md-7">
-						<input type="text" class="form-control" required ng-model="form.contrasena">
+					<div class="col-md-4">
+						<input type="email" class="form-control" required ng-model="form.email">
 					</div>
 				</div>
 
+				<div class="divider"></div>
+
+
 				<div class="form-group">
-					<div class="col-md-3">
-						<label>Titulo</label>
+					<label class="col-sm-2 control-label">Contraseña</label>
+
+					<div class="col-md-4">
+						<input type="text" class="form-control"  ng-model="form.contrasena" ng-minlength="6" required>
 					</div>
-					<div class="col-md-7">
+					<label class="col-sm-2 control-label">Contraseña</label>
+
+					<div class="col-md-4">
+						<input type="text" class="form-control" validate-equals="form.contrasena"  ng-model="confirmPassword" required>
+					</div>
+				</div>
+
+				<div class="divider"></div>
+
+
+				<div class="form-group">
+					<label class="col-sm-2 control-label">Titulo</label>
+
+					<div class="col-md-4">
 						<input type="text" class="form-control" required ng-model="form.titulo">
 					</div>
-				</div>
+					<label class="col-sm-2 control-label">Funcion</label>
 
-
-				<div class="form-group">
-					<div class="col-md-3">
-						<label>Funcion</label>
-					</div>
-					<div class="col-md-7">
+					<div class="col-md-4">
 						<input type="text" class="form-control" required ng-model="form.funcion">
 					</div>
 				</div>
 
+				<div class="divider"></div>
+
 
 				<div class="form-group">
-					<div class="col-md-3">
-						<label>Nacido</label>
-					</div>
-					<div class="col-md-7">
+					<label class="col-sm-2 control-label">Nacido</label>
+
+					<div class="col-md-4">
 						<div class="input-group ui-datepicker">
 							<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
 							<input type="text"

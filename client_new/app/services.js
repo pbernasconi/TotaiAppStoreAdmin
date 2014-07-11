@@ -14,12 +14,12 @@ angular.module('app.services', [])
   })
 
   .factory('Apps', function ($rootScope, $resource) {
-    return $resource('http://www.desa-net.com/TOTAI/db/apps/:SEQ:query', {}, {
+    return $resource('http://www.desa-net.com/TOTAI/db/apps/:SEQ:query:verb', {}, {
         getAll: {method: 'GET', isArray: true},
         getOne: {method: 'GET', params: {SEQ: '@SEQ'}},
         findByName: {method: 'GET', params: {query: '@query'}, isArray: true},
         update: {method: 'PUT', params: {SEQ: '@SEQ'}},
-        new: {method: 'POST'},
+        newApp: {method: 'POST', params: {verb: 'X'}},
         delete: {method: 'DELETE', params: {SEQ: '@SEQ'}}
       }
     );

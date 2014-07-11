@@ -1,11 +1,11 @@
 <div id="nav-wrapper">
-	<ul id="nav" data-ng-controller="NavCtrl" data-collapse-nav data-slim-scroll data-highlight-active>
+	<ul id="nav" data-ng-controller="NavCtrl" > <!--data-collapse-nav data-slim-scroll data-highlight-active>-->
 
 		<!--<li><a ui-sref="dashboard"> <i class="fa fa-dashboard"><span class="icon-bg bg-danger"></span></i><span data-i18n="Dashboard"></span> </a></li>-->
 
 		<li>
 			<a href="#/persona"><i class="fa fa-magic"><span class="icon-bg bg-orange"></span></i><span data-i18n="Users"></span></a>
-			<ul>
+			<ul style="display:block;">
 				<li><a href="#/persona/table"><i class="fa fa-caret-right"></i><span data-i18n="Table"></span></a></li>
 				<li><a href="#/persona/new"><i class="fa fa-caret-right"></i><span data-i18n="New"></span></a></li>
 			</ul>
@@ -14,7 +14,7 @@
 
 		<li>
 			<a href="#/apps"><i class="fa fa-magic"><span class="icon-bg bg-success"></span></i><span data-i18n="Apps"></span></a>
-			<ul>
+			<ul style="display:block;">
 				<li><a href="#/apps/table"><i class="fa fa-caret-right"></i><span data-i18n="Table"></span></a></li>
 				<li><a href="#/apps/upload"><i class="fa fa-caret-right"></i><span data-i18n="Upload"></span></a></li>
 			</ul>

@@ -102,11 +102,11 @@ angular.module('apps.ctrl', [])
   })
 
 
-  .controller('AppsUploadCtrl', function ($scope, $rootScope, $state, $timeout, $upload, WizardHandler) {
-
+  .controller('AppsUploadCtrl', function ($scope, $rootScope, $state, $timeout, $upload, WizardHandler, Apps) {
 
     var iconFile = null;
-
+    var plistFile = null;
+    var ipaFile = null;
 
     $scope.newApp = {
       nombre: null,
@@ -121,7 +121,6 @@ angular.module('apps.ctrl', [])
       version_fecha_hora: null,
       versiona_antigua_fecha_hora: null
     };
-
     var newAppOriginal = angular.copy($scope.newApp);
 
 
@@ -135,37 +134,57 @@ angular.module('apps.ctrl', [])
       fecha_hora: null
     };
 
+
+    Apps.getAll().$promise.then(function (data) {
+      $scope.availableApps = data;
+    });
+
+    $scope.selectUpdateApp = function (selectedApp) {
+      $scope.newApp = selectedApp;
+    };
+
     $scope.select = function (type) {
       switch (type) {
         case 'app':
           $scope.uploadType = 'app';
+          $scope.newApp = angular.copy(newAppOriginal);
           break;
         case 'version':
           $scope.uploadType = 'version';
+          $scope.newApp = angular.copy(newAppOriginal);
           break;
       }
     };
 
+    $scope.canRevert = function (form) {
+      return !angular.equals($scope.newApp, newAppOriginal) || !form.$pristine;
+    };
 
-    if ($scope.uploadType == 'app') {
-      $scope.canRevert = function () {
-        return !angular.equals($scope.newApp, newAppOriginal) || !$scope.form_newApp.$pristine;
-      };
+    $scope.canSubmit = function (form) {
+      return form.$valid && !angular.equals($scope.newApp, newAppOriginal) && $scope.newApp.icon != null;
+    };
 
-      $scope.canSubmit = function () {
-        return $scope.form_newApp.$valid && !angular.equals($scope.form, newAppOriginal);
-      };
+    $scope.onNombreChange = function () {
+      if ($scope.newApp.nombre != undefined) {
+        $scope.newApp.nombre = $scope.newApp.nombre.charAt(0).toUpperCase() + $scope.newApp.nombre.substring(1).toLowerCase();
+        $scope.newApp.bundle_identifier = 'com.totaicitrus.' + $scope.newApp.nombre;
+      } else {
+        $scope.newApp.nombre = null;
+        $scope.newApp.bundle_identifier = null;
+      }
+    };
 
-      $scope.saveNewApp = function (app) {
-        console.log(app);
 
-        uploadNewApp(iconFile, app);
+    /*
+     uploadNewApp(iconFile, app);
 
-        if ($scope.canSubmit()) {
-          WizardHandler.wizard().next();
-        }
-      };
-    }
+     Apps.newApp(app).$promise.then(function (data) {
+     console.log(data);
+     WizardHandler.wizard().next();
+
+     });
+     */
+
 
     function uploadNewApp(file, newApp) {
       $scope.upload = $upload
@@ -186,23 +205,48 @@ angular.module('apps.ctrl', [])
         });
     }
 
-    $scope.iconSelect = function ($files) {
-      iconFile = $files;
-      for (var i = 0; i < $files.length; i++) {
-        var $file = $files[i];
-        if (window.FileReader && $file.type.indexOf('image') > -1) {
-          var fileReader = new FileReader();
-          fileReader.readAsDataURL($files[i]);
-          var loadFile = function (fileReader, index) {
-            fileReader.onload = function (e) {
-              $timeout(function () {
-                $scope.newApp.icon = e.target.result;
-              });
-            }
-          }(fileReader, i);
+    $scope.iconSelect = function ($file) {
+      iconFile = $file;
+      if (window.FileReader && $file[0].type.indexOf('image') > -1) {
+        var fileReader = new FileReader();
+        fileReader.readAsDataURL($file[0]);
+
+        fileReader.onload = function (e) {
+
+          $timeout(function () {
+            $scope.newApp.icon = e.target.result;
+          });
         }
       }
 
+
     };
 
+
+    $scope.plistFileSelect = function ($file) {
+      plistFile = $file;
+      var fileReader = new FileReader();
+      fileReader.readAsText($file[0]);
+
+      fileReader.onload = function (e) {
+        var plist = new PlistParser(e.target.result);
+
+        var res = plist.parse();
+        console.log(res);
+
+        $timeout(function () {
+          $scope.plistUpload = true;
+          $scope.assets = res.items[0].assets;
+          $scope.metadata = res.items[0].metadata;
+        });
+      }
+    }
+
+    $scope.ipaFileSelect = function ($file) {
+      ipaFile = $file;
+
+      $timeout(function () {
+        $scope.ipaUpload = true;
+      });
+    }
   });
